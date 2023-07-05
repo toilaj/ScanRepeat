@@ -75,7 +75,6 @@ func calcHash(path string) (string, error) {
 
 func compareInternal(fr *os.File, fo *os.File, filelist []string, wg *sync.WaitGroup) {
 	defer wg.Done()
-	fmt.Println(len(filelist))
 	for _, path := range filelist {
 		md5str, err := calcHash(path)
 		if err != nil {
@@ -119,7 +118,6 @@ func compare() {
 	var batch int
 	for index, path := range scanData.FileList {
 		inputList = append(inputList, path)
-		fmt.Println(inputList)
 		if index-batch+1 == countPerworker {
 			wg.Add(1)
 			go compareInternal(fr, fo, inputList, &wg)
