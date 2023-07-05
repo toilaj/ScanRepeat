@@ -42,7 +42,6 @@ func init() {
 	}
 	scanData = new(ScanData)
 	scanData.Md5Map = make(map[string]string)
-	fmt.Println("Init ScanData")
 }
 
 func SetPath(path string) {
@@ -82,8 +81,8 @@ func compareInternal(fr *os.File, fo *os.File, filelist []string, wg *sync.WaitG
 		if err != nil {
 			continue
 		}
-		fo.WriteString(path + "\n")
 		scanData.mutex.Lock()
+		fo.WriteString(path + "\n")
 		if v, ok := scanData.Md5Map[md5str]; ok {
 			outStr := fmt.Sprintf("origin: %s\n", v)
 			outStr = fmt.Sprintf("%srepeat: %s\n\n", outStr, path)

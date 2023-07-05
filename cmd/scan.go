@@ -8,7 +8,7 @@ import (
 )
 
 var scanCmd = &cobra.Command{
-	Use:   "scan",
+	Use:   "scan [flags] <path>",
 	Short: "scan the path",
 	Long:  "scan the path to find repeat file",
 	Run: func(cmd *cobra.Command, args []string) {
