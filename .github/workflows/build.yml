@@ -19,7 +19,9 @@ jobs:
         cache-dependency-path: go.sum
         
     - name: Build
-      run: ./build.sh
+      run: |
+        chmod +x ./build.sh
+        ./build.sh
       
     - name: Zip the Build
       run: zip -r ${{ secrets.ReleaseZipName }} ./output/*
