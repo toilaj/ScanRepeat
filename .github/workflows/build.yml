@@ -1,4 +1,4 @@
-name: golang Release
+name: build
 
 on:
   workflow_dispatch:
@@ -37,6 +37,6 @@ jobs:
         body: TODO New Release.
         draft: false
         prerelease: false
-        token: ${{ github.UPLOAD_TOKEN }}
+        token: ${{ secrets.UPLOAD_TOKEN }}
         files: |
           asset/ScanRepeat.zip
