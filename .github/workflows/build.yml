@@ -27,7 +27,7 @@ jobs:
       run: |
         mkdir asset
         zip -r asset/ScanRepeat.zip ./output/*
-        VERSION_TAG=${{ github.ref }
+        VERSION_TAG=${{ github.ref }}
         VERSION_TAG=${VERSION_TAG#*refs/tags/}
       
     - name: Create Release and Upload Release Asset
