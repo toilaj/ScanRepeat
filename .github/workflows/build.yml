@@ -24,7 +24,9 @@ jobs:
         ./build.sh
       
     - name: Zip the Build
-      run: zip -r ${{ github.ref }}.zip ./output/*
+      run: |
+        mkdir asset
+        zip -r asset/ScanRepeat.zip ./output/*
       
     - name: Create Release and Upload Release Asset
       uses: softprops/action-gh-release@v1
@@ -36,4 +38,4 @@ jobs:
         draft: false
         prerelease: false
         files: |
-          ${{ github.ref }}.zip
+          asset/ScanRepeat.zip
