@@ -37,5 +37,6 @@ jobs:
         body: TODO New Release.
         draft: false
         prerelease: false
+        token: ${{ github.UPLOAD_TOKEN }}
         files: |
           asset/ScanRepeat.zip
