@@ -1,0 +1,44 @@
+name: golang Release
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      
+    - name: Setup go
+      uses: actions/setup-go@v3
+      with:
+        go-version-file: 'go.mod'
+        check-latest: true
+        cache: true
+        cache-dependency-path: go.sum
+        
+      
+    - name: Build
+      run: ./build.sh
+      
+    - name: Zip the Build
+      run: zip -r ${{ secrets.ReleaseZipName }} ./output/*
+      
+    - name: Create Release and Upload Release Asset
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ github.ref }}
+        name: Release ${{ github.ref }}
+        body: TODO New Release.
+        draft: false
+        prerelease: false
+        files: |
+          ${{ secrets.ReleaseZipName }}.zip
+          LICENSE 
